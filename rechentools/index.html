@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: black;
+        color: aliceblue;
+    }
+</style>
+<body>
+    <div>
+        <div>
+            <h2>prozente rechnen</h2>
+            <div>
+                <input id="input1ID" type="number" placeholder="...">
+                <input id="input2ID" type="number" placeholder="...">
+                <div>
+                    <button onclick="calcu()">calc</button>
+                </div>
+                <div id="resultID">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function calcu() {
+
+            let iamo = document.getElementById("input1ID").value;
+            let iges = document.getElementById("input2ID").value;
+            let ires = ((iamo / iges) * 100);
+            let output = ires.toFixed(2)
+
+            resultID.innerHTML = `${iamo} von ${iges} sind ${output}%`;           
+
+        }
+    </script>
+</body>
+</html>
