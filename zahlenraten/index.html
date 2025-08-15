@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahlenraten</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<style>
+    /* ===== Global Setup ===== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(-45deg, #ff0077, #00f0ff, #ffea00, #ff0077);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        color: white;
+    }
+
+    /* ===== Container ===== */
+    div {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        text-align: center;
+        backdrop-filter: blur(15px);
+        animation: fadeIn 1.5s ease;
+    }
+
+    /* ===== Titel ===== */
+    h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00, 0 0 40px #ff0077;
+        animation: pulseText 2s infinite;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00, 0 0 40px #ff0077;
+        animation: pulseText 2s infinite;
+    }
+
+
+    /* ===== Input ===== */
+    input {
+        padding: 10px 15px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    input:focus {
+        background: rgba(255,255,255,0.2);
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #00f0ff;
+    }
+
+    /* ===== Button ===== */
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(90deg, #ff0077, #ffea00);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px #ff0077;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+        background: linear-gradient(90deg, #00f0ff, #ff0077);
+        box-shadow: 0 0 30px #00f0ff;
+    }
+
+    /* ===== Status Text ===== */
+    #status {
+        margin-top: 20px;
+        font-size: 1.5em;
+        min-height: 30px;
+        font-weight: bold;
+        text-shadow: 0 0 5px #fff, 0 0 10px #00f0ff, 0 0 20px #ff0077;
+        animation: fadeInText 1s ease;
+    }
+
+    
+
+    /* ===== Animations ===== */
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: scale(0.9);}
+        to {opacity: 1; transform: scale(1);}
+    }
+
+    @keyframes pulseText {
+        0% {text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00, 0 0 40px #ff0077;}
+        50% {text-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, 0 0 80px #ff0077;}
+        100% {text-shadow: 0 0 10px #ffea00, 0 0 20px #ffea00, 0 0 40px #ff0077;}
+    }
+
+    @keyframes fadeInText {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+</style>
+<body>
+    <div>
+        <h2>Errate die Zahl von 1 bis 100</h2>
+        <input id="inputID" type="number" placeholder="1-100">
+        <button onclick="guessNumber()">Guess</button>
+        <div id="status"></div><br>
+        <h3 id="tries"></h3>
+    </div>
+
+    
+    
+    <script>
+        const RandNumb = Math.floor(Math.random() * 100) + 1;
+        let i = 0;
+
+        function guessNumber() {
+            const input = document.getElementById("inputID");
+            const statusDiv = document.getElementById("status");
+            const guess = parseInt(input.value); // String -> Zahl
+            const Vtries = document.getElementById("tries");
+
+            if (guess === RandNumb) {
+                statusDiv.innerHTML = `Gewonnen! <button onclick="location.reload()">nochmal</button>`;
+            } else if (guess > RandNumb) {
+                statusDiv.innerHTML = "kleiner!";
+            } else {
+                statusDiv.innerHTML = "höher!";
+            }
+
+            i++
+            Vtries.innerHTML = `Versuche: ${i}`;
+
+        }
+    </script>
+
+    <div class="jinxlogo" style="display: none;">
+
+                
+        ░░░░░██╗██╗███╗░░██╗██╗░░██╗
+        ░░░░░██║██║████╗░██║╚██╗██╔╝
+        ░░░░░██║██║██╔██╗██║░╚███╔╝░
+        ██╗░░██║██║██║╚████║░██╔██╗░
+        ╚█████╔╝██║██║░╚███║██╔╝╚██╗
+        ░╚════╝░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝
+
+    </div>
+</body>
+</html>
+
+
