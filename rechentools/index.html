@@ -12,16 +12,28 @@
     }
 </style>
 <body>
-    <div>
+    <div class="main">
+        <div class="settings">
+            <p>anzahl nachkommerstellen: <input type="number" id="kommaStellenID" value="2"></p>
+        </div>
         <div>
             <h2>prozente rechnen</h2>
             <div>
                 <input id="input1ID" type="number" placeholder="...">
                 <input id="input2ID" type="number" placeholder="...">
-                <div>
-                    <button onclick="calcu()">calc</button>
-                </div>
+                <button onclick="calc1()">calc</button>
                 <div id="resultID">
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Rabatte berechnen</h2>
+            <div>
+                <input id="preisID" type="number" placeholder="preis eingeben...">
+                <input id="rabattID" type="number" placeholder="rabatt eingeben in %...">
+                <button onclick="calc2()">calc</button>
+                <div id="result2ID">
 
                 </div>
             </div>
@@ -30,15 +42,23 @@
 
     <script>
 
-        function calcu() {
+        function calc1() {
 
             let iamo = document.getElementById("input1ID").value;
             let iges = document.getElementById("input2ID").value;
             let ires = ((iamo / iges) * 100);
-            let output = ires.toFixed(2)
+            let output = ires.toFixed(document.getElementById("kommaStellenID").value)
 
             resultID.innerHTML = `${iamo} von ${iges} sind ${output}%`;           
+        }
 
+        function calc2() {
+            let preis = document.getElementById("preisID").value;
+            let rabatt = document.getElementById("rabattID").value;
+            let result2 = ((((preis / preis) * 100)-rabatt) / 100) * preis;
+            let output2 = result2.toFixed(document.getElementById("kommaStellenID").value)
+
+            result2ID.innerHTML = `nach ${rabatt}% rabatt kostet es ${output2}€`;
         }
     </script>
 </body>
