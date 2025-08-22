@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: black;
+        color: aliceblue;
+    }
+    .CalcItem {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        margin: 5px;
+    }
+    #ergebnis {
+        width: 300px;
+        height: 50px;
+        background-color: #333;
+        color: white;
+        text-align: right;
+        padding-right: 10px;
+        font-size: 24px;
+        line-height: 50px;
+    }
+</style>
+<body>
+    <div class="main">
+        <div class="settings">
+            <p>anzahl nachkommerstellen: <input type="number" id="kommaStellenID" value="2"></p>
+        </div>
+        <div>
+            <h2>prozente rechnen</h2>
+            <div>
+                <input id="input1ID" type="number" placeholder="...">
+                <input id="input2ID" type="number" placeholder="...">
+                <button onclick="calc1()">calc</button>
+                <div id="resultID">
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Rabatte berechnen</h2>
+            <div>
+                <input id="preisID" type="number" placeholder="preis eingeben...">
+                <input id="rabattID" type="number" placeholder="rabatt eingeben in %...">
+                <button onclick="calc2()">calc</button>
+                <div id="result2ID">
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div id="calculator">
+            
+            <h2>taschenrechner</h2>
+            <br>
+            <div id="ergebnis">
+
+            </div>
+            
+            
+            <div>
+                <button class="CalcItem" onclick="addNumber(1)">1</button>
+                <button  class="CalcItem"onclick="addNumber(2)">2</button>
+                <button class="CalcItem" onclick="addNumber(3)">3</button>
+                <button class="CalcItem" onclick="addNumber('+')">+</button>
+                <br>
+                <button class="CalcItem" onclick="addNumber(4)">4</button>
+                <button class="CalcItem" onclick="addNumber(5)">5</button>
+                <button class="CalcItem" onclick="addNumber(6)">6</button>
+                <button class="CalcItem" onclick="addNumber('-')">-</button>
+                <br>
+                <button class="CalcItem" onclick="addNumber(7)">7</button>
+                <button class="CalcItem" onclick="addNumber(8)">8</button>
+                <button class="CalcItem" onclick="addNumber(9)">9</button>
+                <button class="CalcItem" onclick="addNumber('*')">*</button>
+                <br>
+                <button class="CalcItem" onclick="addNumber(0)">0</button>
+                <button class="CalcItem" onclick="addNumber('.')">.</button>
+                <button class="CalcItem" onclick="calculate()">=</button>
+                <button class="CalcItem" onclick="addNumber('/')">/</button>
+                <br>
+                <button class="CalcItem" onclick="document.getElementById('ergebnis').innerHTML = ''">C</button>
+                <button class="CalcItem" onclick="DelNumber()">Del</button>
+
+
+            </div>
+
+      
+        </div>
+    </div>
+
+    <script>
+
+        function calc1() {
+
+            let iamo = document.getElementById("input1ID").value;
+            let iges = document.getElementById("input2ID").value;
+            let ires = ((iamo / iges) * 100);
+            let output = ires.toFixed(document.getElementById("kommaStellenID").value)
+
+            resultID.innerHTML = `${iamo} von ${iges} sind ${output}%`;           
+        }
+
+        function calc2() {
+            let preis = document.getElementById("preisID").value;
+            let rabatt = document.getElementById("rabattID").value;
+            let result2 = ((((preis / preis) * 100)-rabatt) / 100) * preis;
+            let output2 = result2.toFixed(document.getElementById("kommaStellenID").value)
+
+            result2ID.innerHTML = `nach ${rabatt}% rabatt kostet es ${output2}€`;
+        }
+        function addNumber(operation) {
+            document.getElementById("ergebnis").innerHTML += operation;
+        }
+        function calculate() {
+            let ergebnis = document.getElementById("ergebnis").innerHTML;
+            try {
+                let result = eval(ergebnis);
+                document.getElementById("ergebnis").innerHTML = result.toFixed(document.getElementById("kommaStellenID").value);
+            } catch (error) {
+                document.getElementById("ergebnis").innerHTML = "Error";
+            }
+        }
+        function DelNumber() {
+            let ergebnis = document.getElementById("ergebnis").innerHTML;
+            document.getElementById("ergebnis").innerHTML = ergebnis.slice(0, -1);
+        }
+    </script>
+</body>
+</html>
